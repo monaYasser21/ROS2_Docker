@@ -1,3 +1,9 @@
- I pulled an ubuntu:24.04 Image as Ros_2 only works on this version or higher, you can download these files and put them into a directory in addition to a copy 
- from your .bashrc file , Don't forget to source it using source /opt/ros/jazzy/setup.bash
- PS: I have run it as a root, you can run it either as a root or adding a username like ros_jazzy
+I pulled an `ubuntu:24.04` image, as ROS 2 only works on this version or higher.
+
+You can download these files and place them in a directory, along with a copy  
+from your `.bashrc` file. Don't forget to source it:
+
+```bash
+source /opt/ros/jazzy/setup.bash
+
+PS: I ran it as root, but you can run it either as root or by adding a user, like ros_jazzy
