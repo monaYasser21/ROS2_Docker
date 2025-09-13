@@ -1,0 +1,34 @@
+version: "3"
+services:
+  ros_jazzy_container:
+    build: .
+    image: ros_jazzy:latest
+    container_name: ros_jazzy_container
+    volumes:
+      - /dev:/dev
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+      - ./.bashrc:/root/.bashrc
+      - ros2_ws:/root/ros2_ws
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all  # NVIDIA GPU support
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - __NV_PRIME_RENDER_OFFLOAD=1
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia
+      
+    devices:
+      - nvidia.com/gpu=all
+      - /dev/dri:/dev/dri
+
+
+    network_mode: "host"
+    command: ["service ssh start"]
+    privileged: true
+
+    entrypoint: ["/bin/bash", "-c", "source /opt/ros/jazzy/setup.bash && source /root/.bashrc && tail -f /dev/null"]
+
+volumes:
+  ros2_ws:
